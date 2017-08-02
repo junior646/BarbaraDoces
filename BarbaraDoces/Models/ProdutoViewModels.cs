@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace BarbaraDoces.Models
@@ -41,7 +42,7 @@ namespace BarbaraDoces.Models
 
         public byte[] Imagem_Produto { get; set; }
         public PrecoViewModel Preco { get; set; }
-        public SaborViewModel Sabor { get; set; }
+        public List<SaborViewModel> Sabor { get; set; }
         public TipoProdutoViewModel TipoProduto { get; set; }
     }
     public class PrecoViewModel

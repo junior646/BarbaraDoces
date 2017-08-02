@@ -65,7 +65,6 @@ namespace BarbaraDoces.Controllers
                          from b in context.TipoProduto.Where(b => b.Id_TipoProduto == a.Id_TipoProduto && b.Ativo == true)
                          from c in context.Produto.Where(c => c.Id_Produto == a.Id_Produto && c.Ativo == true)
                          from d in context.Preco.Where(d => d.Id_Preco == a.Id_Preco)
-                         from e in context.Sabor.Where(e => e.Id_Sabor == a.Id_Sabor && e.Ativo == true)
                          select new ProdutoViewModel
                          {
                              Nome_Produto = c.Nome_Produto,
@@ -73,7 +72,16 @@ namespace BarbaraDoces.Controllers
                              Ativo = c.Ativo,
                              Vali_Produto = c.Vali_Produto,
                              Preco = new PrecoViewModel() { Id_Preco = a.Id_Preco, Valor_Produto = d.Valor_Produto },
-                             Sabor = new SaborViewModel() { Id_Sabor = a.Id_Sabor, Ativo = e.Ativo, Desc_Sabor = e.Desc_Sabor },
+                             Sabor = new List<SaborViewModel>
+                                ( from e in context.Sabor.Where(e => e.Id_Sabor == a.Id_Sabor && e.Ativo == true)
+                                  select new SaborViewModel { Ativo = e.Ativo, Desc_Sabor = e.Desc_Sabor, Id_Sabor = e.Id_Sabor } ).ToList(),
+                             //Sabor = new List<SaborViewModel>()
+                             //{
+                             //    Desc_Sabor = from e in context.Sabor
+                             //                  where e.Id_Sabor == a.Id_Sabor && e.Ativo == true
+                             //                  select e.Desc_Sabor ?? "Test"
+                             //},
+
                              TipoProduto = new TipoProdutoViewModel() { Id_TipoProduto = a.Id_TipoProduto, Desc_TipoProduto = b.Desc_TipoProduto, Ativo = b.Ativo }
                          }).ToList();
                     else
@@ -84,7 +92,7 @@ namespace BarbaraDoces.Controllers
                          from b in context.TipoProduto.Where(b => b.Id_TipoProduto == a.Id_TipoProduto && b.Ativo == true)
                          from c in context.Produto.Where(c => c.Id_Produto == a.Id_Produto && c.Ativo == true)
                          from d in context.Preco.Where(d => d.Id_Preco == a.Id_Preco)
-                         from e in context.Sabor.Where(e => e.Id_Sabor == a.Id_Sabor && e.Ativo == true)
+                         //from e in context.Sabor.Where(e => e.Id_Sabor == a.Id_Sabor && e.Ativo == true)
                          select new ProdutoViewModel
                          {
                              Nome_Produto = c.Nome_Produto,
@@ -92,7 +100,10 @@ namespace BarbaraDoces.Controllers
                              Ativo = c.Ativo,
                              Vali_Produto = c.Vali_Produto,
                              Preco = new PrecoViewModel() { Id_Preco = a.Id_Preco, Valor_Produto = d.Valor_Produto },
-                             Sabor = new SaborViewModel() { Id_Sabor = a.Id_Sabor, Ativo = e.Ativo, Desc_Sabor = e.Desc_Sabor },
+                             Sabor = new List<SaborViewModel>
+                                (from e in context.Sabor.Where(e => e.Id_Sabor == a.Id_Sabor && e.Ativo == true)
+                                 select new SaborViewModel { Ativo = e.Ativo, Desc_Sabor = e.Desc_Sabor, Id_Sabor = e.Id_Sabor }).ToList(),
+                             //new SaborViewModel() { Id_Sabor = a.Id_Sabor, Ativo = e.Ativo, Desc_Sabor = e.Desc_Sabor },
                              TipoProduto = new TipoProdutoViewModel() { Id_TipoProduto = a.Id_TipoProduto, Desc_TipoProduto = b.Desc_TipoProduto, Ativo = b.Ativo }
                          }).ToList();
 
