@@ -1,0 +1,146 @@
+﻿@{
+    ViewBag.Title = "Em que podemos te ajudar?";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>Solicite um orçamento agora mesmo, é grátis!</h3>
+
+<h3>@ViewBag.Message</h3>
+<script type="text/javascript" src="Scripts/mascaras.js"> </script>
+
+<p>
+    Ficou interessado em algum de nossos produtos e gostaria de saber quanto custaria para encomendá-los?<br />
+    Ou teria alguma dúvida, gostaria de reclamar ou ficou insatisfeito com algum serviço ou produto nosso adquirido?<br />
+    Entre em contato conosco através do Formulário abaixo, Telefone ou E-mail.
+    <br />
+    <br />
+</p>
+<div id="corpo">
+    @*<%--Formulário de contato--%>*@
+    <div id="dvformulario" runat="server" style="float: left; width: 45%">
+        <table>
+            <tr>
+                <th>
+                    <asp:Label runat="server" ID="lblNome" Text="Nome:" />
+                </th>
+                <td>
+                    <asp:TextBox runat="server" ID="txtNome" MaxLength="75" Width="200px" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <asp:Label runat="server" ID="lblEmail" Text="E-mail:" />
+                </th>
+                <td>
+                    <asp:TextBox runat="server" ID="txtEmail" MaxLength="75" Width="200px" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <asp:Label runat="server" ID="lblTelefone" Text="Telefone:" />
+                </th>
+                <td>
+                    <asp:TextBox runat="server" ID="txtTelefone" TextMode="Phone" MaxLength="20" Width="200px" onkeyup="formataTelefone(this,event);" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <asp:Label runat="server" ID="lblAssunto" Text="Assunto:" />
+                </th>
+                <td>
+                    <asp:TextBox runat="server" ID="txtAssunto" MaxLength="50" Width="200px" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <asp:Label runat="server" ID="lblMensagem" Text="Mensagem:" />
+                </th>
+                <td>
+                    <asp:TextBox runat="server" ID="txtMensagem" Height="100px" Width="200px" TextMode="MultiLine" MaxLength="300" />
+                </td>
+
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <asp:Label runat="server" ID="lblMensagemAcao" Text="" Font-Bold="true" ForeColor="Red" />
+                    <br />
+                    <asp:Button runat="server" ID="btnLimpar" Text="Limpar" OnClick="btnLimpar_Click" />
+                    &nbsp;&nbsp;&nbsp;
+                    <asp:Button runat="server" ID="btnEnviar" Text="Enviar" OnClick="btnEnviar_Click" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    @*<%--Informações de contato--%>*@
+    <div id="inf-contato" style="float: left">
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="47.25" height="38.25" viewBox="0 0 47.25 38.25">
+            <path d="M10.734 20.435"></path>
+            <path fill="#1D1D1B" d="M33.762 13.17c-.036-5.59-4.613-10.107-10.201-10.071-5.59.036-10.108 4.612-10.072 10.202.009 1.455.33 2.837.892 4.084h-.002l9.407 20.57 9.14-20.689h-.002c.546-1.255.847-2.641.838-4.096zm-10.086 7.844c-4.289.027-7.801-3.439-7.829-7.729-.027-4.288 3.439-7.801 7.729-7.829 4.289-.027 7.801 3.44 7.829 7.729.027 4.29-3.441 7.801-7.729 7.829z"></path>
+        </svg>
+        <br />
+        <figure>
+            <img src="Content/images/SVG/404-whatsapp.svg" alt="Contato pelo WhatsAPP!" title="Contato pelo WhatsAPP!" />
+            <figcaption title="Contato pelo WhatsApp!">Entre em contato também pelo WhatsApp!</figcaption>
+        </figure>
+        <address>
+            <b><u>Bárbara Doces</u></b><br />
+            Praça dos Expedicionários, 57<br />
+            Santa Maria, Santo André<br />
+            <%--<abbr title="Nosso número">Número:</abbr>--%>
+            Números: <b>(11) 98572-0972</b><br />
+            <b>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                (11) 96769-7262
+            </b><br />
+            <strong>Contato:</strong>
+            <a href="mailto:contato@docesdabarbara.com.br">contato@docesdabarbara.com.br</a><br />
+        </address>
+    </div>
+    <br />
+
+</div>
+<div class="limpar" />
+<div>
+    <br />
+    <p>
+        <strong>Atenção:</strong> Como não somos uma loja física temos limitações quanto as regiões aonde podemos entregar os nossos produtos.<br />
+        No momento estamos atendendo somente alguns municípios:
+        <br />
+        <br />
+        <strong>
+            Santo André<br />
+            São Bernardo do Campo<br />
+            São Caetano do Sul<br />
+            São Paulo (Bairros próximos ao ABC Paulista)
+        </strong>
+        <br />
+    </p>
+    <br />
+</div>
+<style type="text/css">
+    .limpar {
+        clear: both;
+    }
+
+    figure {
+        background-color: #F2EDED;
+        border: 1px solid #ccc;
+        text-align: center;
+    }
+
+    figcaption {
+        font-style: italic;
+    }
+</style>
+    @*<%--Mascara de validação--%>*@
+<script type="text/javascript">
+    function ValidateNumberOnly() {
+        if ((event.keyCode < 48 || event.keyCode > 57)) {
+            event.returnValue = false;
+        }
+    }
+
+    mascaraTelefone(formulario.txtTelefone);
+</script>

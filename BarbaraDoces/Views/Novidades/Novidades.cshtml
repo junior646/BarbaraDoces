@@ -1,0 +1,98 @@
+﻿@model List<BarbaraDoces.Context.Novidade>
+
+@{
+    ViewBag.Title = "Novidades";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    table {
+        border-collapse: collapse;
+        width: 80%;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        /*background-color: #4CAF50;*/
+        background-color: saddlebrown;
+        text-align: center;
+        color: white;
+        /*width: 20%;*/
+        border-bottom: 1px solid #ddd;
+    }
+
+    td {
+        /*width: 80%;*/
+    }
+
+    .tamanho-foto {
+        height: auto;
+        max-width: 150px;
+    }
+
+    .borda-abaixo {
+        border-bottom: 1px solid #ddd;
+    }
+
+    .segcor-tab {
+        background-color: #f2f2f2;
+        color: maroon;
+    }
+
+    .dt-divulgacao {
+        width: 100px;
+        font-size: 10px;
+        color: #808080;
+        padding-top: 60px;
+    }
+
+    .obs-site {
+        font-size: 12px;
+    }
+</style>
+
+<h2>Confira as Novidades que separamos para você e se delicie com elas!</h2>
+
+@if (Model.Count > 0)
+{
+    <table>
+        <thead>
+            <tr>
+                <th width="10%">Produto </th>
+                <th width="70%">Descrição </th>
+                <th colspan="2" />
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var objNovidade in Model)
+            {
+                <tr>
+                    <td colspan="4"><h3>@Html.DisplayFor(modelItem => objNovidade.Titulo_Novidade)</h3></td>
+                </tr>
+                <tr>
+                    <td><img src="../Content/bolo-chocolate-com-doce-de-leite.jpg" title="Bolo de Chocolate" alt="Bolo de Chocolate" class="tamanho-foto" /></td>
+                    <td colspan="2">@Html.DisplayFor(modelItem => objNovidade.Desc_Novidade)<br /><br /><span style="float:right">@Html.ActionLink("Saiba Mais", "Paes_de_mel","Produtos", new { id = objNovidade.Id_Produto }, null)</span></td>
+                    <td><p class="dt-divulgacao">Data da Divulgação: @Html.DisplayFor(modelItem => objNovidade.Dt_Novidade)</p></td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4" class="obs-site"><b>Atenção: </b>Preços, condições e correção de erros de digitação podendo sofrer alterações sem prévia notificação.</td>
+            </tr>
+        </tfoot>
+    </table>
+}
+else
+{
+    <h4 style="color:red"><span>No momento não possuímos promoções ativas</span></h4>
+}

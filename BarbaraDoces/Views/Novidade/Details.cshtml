@@ -1,0 +1,43 @@
+﻿@model BarbaraDoces.Models.NovidadeViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>NovidadeViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TituloNovidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TituloNovidade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DescNovidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DescNovidade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DtNovidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DtNovidade)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdNovidade }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

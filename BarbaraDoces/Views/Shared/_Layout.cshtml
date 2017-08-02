@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Sejam Bem-Vindos!</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Bárbara Doces", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @*<li>@Html.ActionLink("Produtos", "Index", "Home")</li>*@
+                    <li>@Html.ActionLink("Novidades", "Index", "Novidades")</li>
+                    <li>@Html.ActionLink("Início", "Index", "Home")</li>
+                    <li class="active">
+                        <div style="top:7px;position:relative" />@*Alinhamento do menu ModoDesktop*@
+
+                        <div class="btn btn-group" style="text-align:left">
+                            <a class="dropdown-toggle" data-toggle="dropdown">
+                                Produtos <span class="caret" />
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">Pães de Mel <span class="caret" /></a>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("Ingredientes", "Ingredientes", "Produtos")</li>
+                                        <li>@Html.ActionLink("Sabores", "Sabores", "Produtos")</li>
+                                        <li>@Html.ActionLink("Preços", "Precos", "Produtos")</li>
+                                        <li>@Html.ActionLink("Validade", "Validade", "Produtos")</li>
+                                        <li class="divider"></li>
+                                        @*<li><a href="#">Preços <span class="caret" /></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="#">Unidade</a></li>
+                                                <li><a href="#">Kit (até 3 unidades)</a></li>
+                                                <li><a href="#">Encomenda</a></li>
+                                                <li class="divider"></li>
+                                                <li><a tabindex="-1" href="#">Ver Todos</a></li>
+                                            </ul></li>*@
+                                        <li>@Html.ActionLink("Ver Todos", "Paes_de_mel", "Produtos", new { id = 1 }, null)</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">Trufa <span class="caret" /></a>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("Ingredientes", "Index", "Home")</li>
+                                        <li>@Html.ActionLink("Sabores", "Index", "Home")</li>
+                                        <li>@Html.ActionLink("Preços", "Index", "Home")</li>
+                                        <li>@Html.ActionLink("Validade", "Index", "Home")</li>
+                                        <li>@Html.ActionLink("Tamanhos e Formas", "Index", "Home")</li>
+                                        <li class="divider"></li>
+                                        <li>@Html.ActionLink("Ver Todos", "Trufas", "Produtos", new { id = 3 }, null)</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="">Bolo de Pote <span class="caret" /></a>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("Ingredientes", "Index", "Home")</li>
+                                        <li>@Html.ActionLink("Sabores", "Index", "Home")</li>
+                                        <li>@Html.ActionLink("Preços", "Index", "Home")</li>
+                                        <li>@Html.ActionLink("Validade", "Index", "Home")</li>
+                                        <li>@Html.ActionLink("Tamanhos e Formas", "Index", "Home")</li>
+                                        <li class="divider"></li>
+                                        <li>@Html.ActionLink("Ver Todos", "Bolo_de_pote", "Produtos", new { id = 5 }, null)</li>
+                                    </ul>
+                                </li>
+                                <li class="divider"></li>
+                                <li>@Html.ActionLink("Ver Todos os Produtos", "Todos_os_produtos", "Produtos")</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>@Html.ActionLink("Encomendas", "Index", "Encomendas")</li>
+                    <li>@Html.ActionLink("Nossa História", "About", "Empresa")</li>
+                    <li>@Html.ActionLink("Fale Conosco", "Contact", "Contato")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Bárbara Doces</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

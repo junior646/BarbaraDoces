@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="23c4a420a66c450bbccc257aaca3c024" Name="Diagram1">
+        <EntityTypeShape EntityType="DocesBarbaraViewModel.Novidade" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DocesBarbaraViewModel.Preco" Width="1.5" PointX="8.625" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DocesBarbaraViewModel.Produto" Width="1.5" PointX="3.5" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DocesBarbaraViewModel.Sabor" Width="1.5" PointX="8.625" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DocesBarbaraViewModel.TipoProduto" Width="1.5" PointX="3.5" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DocesBarbaraViewModel.TipoProdutoXProdutoXSaborXPreco" Width="1.5" PointX="6" PointY="2.625" IsExpanded="true" />
+        <AssociationConnector Association="DocesBarbaraViewModel.FK_Novidade_Produto" ManuallyRouted="false" />
+        <AssociationConnector Association="DocesBarbaraViewModel.FK__TipoProdu__Id_Pr__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="DocesBarbaraViewModel.FK__TipoProdu__Id_Pr__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="DocesBarbaraViewModel.FK__TipoProdu__Id_Sa__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="DocesBarbaraViewModel.FK__TipoProdu__Id_Ti__412EB0B6" ManuallyRouted="false" >
+        </AssociationConnector>
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

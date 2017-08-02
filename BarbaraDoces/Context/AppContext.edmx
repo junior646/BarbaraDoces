@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DocesBarbaraViewModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Novidade">
+          <Key>
+            <PropertyRef Name="Id_Novidade" />
+          </Key>
+          <Property Name="Id_Novidade" Type="int" Nullable="false" />
+          <Property Name="Desc_Novidade" Type="nchar" MaxLength="100" />
+          <Property Name="Titulo_Novidade" Type="nchar" MaxLength="75" Nullable="false" />
+          <Property Name="Dt_Novidade" Type="datetime" Nullable="false" />
+          <Property Name="Id_Produto" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Preco">
+          <Key>
+            <PropertyRef Name="Id_Preco" />
+          </Key>
+          <Property Name="Id_Preco" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Valor_Produto" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Produto">
+          <Key>
+            <PropertyRef Name="Id_Produto" />
+          </Key>
+          <Property Name="Id_Produto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome_Produto" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="Desc_Produto" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Vali_Produto" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Ativo" Type="bit" Nullable="false" />
+          <Property Name="Imagem_Produto" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Sabor">
+          <Key>
+            <PropertyRef Name="Id_Sabor" />
+          </Key>
+          <Property Name="Id_Sabor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Desc_Sabor" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Ativo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoProduto">
+          <Key>
+            <PropertyRef Name="Id_TipoProduto" />
+          </Key>
+          <Property Name="Id_TipoProduto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Desc_TipoProduto" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="Ativo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoProdutoXProdutoXSaborXPreco">
+          <Key>
+            <PropertyRef Name="Id_TipoProdutoXPreco" />
+          </Key>
+          <Property Name="Id_TipoProdutoXPreco" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_TipoProduto" Type="int" Nullable="false" />
+          <Property Name="Id_Produto" Type="int" Nullable="false" />
+          <Property Name="Id_Sabor" Type="int" Nullable="false" />
+          <Property Name="Id_Preco" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__TipoProdu__Id_Pr__4222D4EF">
+          <End Role="Produto" Type="Self.Produto" Multiplicity="1" />
+          <End Role="TipoProdutoXProdutoXSaborXPreco" Type="Self.TipoProdutoXProdutoXSaborXPreco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="Id_Produto" />
+            </Principal>
+            <Dependent Role="TipoProdutoXProdutoXSaborXPreco">
+              <PropertyRef Name="Id_Produto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TipoProdu__Id_Pr__440B1D61">
+          <End Role="Preco" Type="Self.Preco" Multiplicity="1" />
+          <End Role="TipoProdutoXProdutoXSaborXPreco" Type="Self.TipoProdutoXProdutoXSaborXPreco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Preco">
+              <PropertyRef Name="Id_Preco" />
+            </Principal>
+            <Dependent Role="TipoProdutoXProdutoXSaborXPreco">
+              <PropertyRef Name="Id_Preco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TipoProdu__Id_Sa__4316F928">
+          <End Role="Sabor" Type="Self.Sabor" Multiplicity="1" />
+          <End Role="TipoProdutoXProdutoXSaborXPreco" Type="Self.TipoProdutoXProdutoXSaborXPreco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sabor">
+              <PropertyRef Name="Id_Sabor" />
+            </Principal>
+            <Dependent Role="TipoProdutoXProdutoXSaborXPreco">
+              <PropertyRef Name="Id_Sabor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TipoProdu__Id_Ti__412EB0B6">
+          <End Role="TipoProduto" Type="Self.TipoProduto" Multiplicity="1" />
+          <End Role="TipoProdutoXProdutoXSaborXPreco" Type="Self.TipoProdutoXProdutoXSaborXPreco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoProduto">
+              <PropertyRef Name="Id_TipoProduto" />
+            </Principal>
+            <Dependent Role="TipoProdutoXProdutoXSaborXPreco">
+              <PropertyRef Name="Id_TipoProduto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Novidade_Produto">
+          <End Role="Produto" Type="Self.Produto" Multiplicity="1" />
+          <End Role="Novidade" Type="Self.Novidade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="Id_Produto" />
+            </Principal>
+            <Dependent Role="Novidade">
+              <PropertyRef Name="Id_Produto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DocesBarbaraViewModelStoreContainer">
+          <EntitySet Name="Novidade" EntityType="Self.Novidade" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Preco" EntityType="Self.Preco" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produto" EntityType="Self.Produto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sabor" EntityType="Self.Sabor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoProduto" EntityType="Self.TipoProduto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoProdutoXProdutoXSaborXPreco" EntityType="Self.TipoProdutoXProdutoXSaborXPreco" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__TipoProdu__Id_Pr__4222D4EF" Association="Self.FK__TipoProdu__Id_Pr__4222D4EF">
+            <End Role="Produto" EntitySet="Produto" />
+            <End Role="TipoProdutoXProdutoXSaborXPreco" EntitySet="TipoProdutoXProdutoXSaborXPreco" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TipoProdu__Id_Pr__440B1D61" Association="Self.FK__TipoProdu__Id_Pr__440B1D61">
+            <End Role="Preco" EntitySet="Preco" />
+            <End Role="TipoProdutoXProdutoXSaborXPreco" EntitySet="TipoProdutoXProdutoXSaborXPreco" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TipoProdu__Id_Sa__4316F928" Association="Self.FK__TipoProdu__Id_Sa__4316F928">
+            <End Role="Sabor" EntitySet="Sabor" />
+            <End Role="TipoProdutoXProdutoXSaborXPreco" EntitySet="TipoProdutoXProdutoXSaborXPreco" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TipoProdu__Id_Ti__412EB0B6" Association="Self.FK__TipoProdu__Id_Ti__412EB0B6">
+            <End Role="TipoProduto" EntitySet="TipoProduto" />
+            <End Role="TipoProdutoXProdutoXSaborXPreco" EntitySet="TipoProdutoXProdutoXSaborXPreco" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Novidade_Produto" Association="Self.FK_Novidade_Produto">
+            <End Role="Produto" EntitySet="Produto" />
+            <End Role="Novidade" EntitySet="Novidade" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DocesBarbaraViewModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Novidade">
+          <Key>
+            <PropertyRef Name="Id_Novidade" />
+          </Key>
+          <Property Name="Id_Novidade" Type="Int32" Nullable="false" />
+          <Property Name="Desc_Novidade" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Titulo_Novidade" Type="String" MaxLength="75" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Dt_Novidade" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Id_Produto" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Produto" Relationship="Self.FK_Novidade_Produto" FromRole="Novidade" ToRole="Produto" />
+        </EntityType>
+        <EntityType Name="Preco">
+          <Key>
+            <PropertyRef Name="Id_Preco" />
+          </Key>
+          <Property Name="Id_Preco" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Valor_Produto" Type="Double" Nullable="false" />
+          <NavigationProperty Name="TipoProdutoXProdutoXSaborXPreco" Relationship="Self.FK__TipoProdu__Id_Pr__440B1D61" FromRole="Preco" ToRole="TipoProdutoXProdutoXSaborXPreco" />
+        </EntityType>
+        <EntityType Name="Produto">
+          <Key>
+            <PropertyRef Name="Id_Produto" />
+          </Key>
+          <Property Name="Id_Produto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome_Produto" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Desc_Produto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Vali_Produto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ativo" Type="Boolean" Nullable="false" />
+          <Property Name="Imagem_Produto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Novidade" Relationship="Self.FK_Novidade_Produto" FromRole="Produto" ToRole="Novidade" />
+          <NavigationProperty Name="TipoProdutoXProdutoXSaborXPreco" Relationship="Self.FK__TipoProdu__Id_Pr__4222D4EF" FromRole="Produto" ToRole="TipoProdutoXProdutoXSaborXPreco" />
+        </EntityType>
+        <EntityType Name="Sabor">
+          <Key>
+            <PropertyRef Name="Id_Sabor" />
+          </Key>
+          <Property Name="Id_Sabor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Desc_Sabor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ativo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TipoProdutoXProdutoXSaborXPreco" Relationship="Self.FK__TipoProdu__Id_Sa__4316F928" FromRole="Sabor" ToRole="TipoProdutoXProdutoXSaborXPreco" />
+        </EntityType>
+        <EntityType Name="TipoProduto">
+          <Key>
+            <PropertyRef Name="Id_TipoProduto" />
+          </Key>
+          <Property Name="Id_TipoProduto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Desc_TipoProduto" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ativo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TipoProdutoXProdutoXSaborXPreco" Relationship="Self.FK__TipoProdu__Id_Ti__412EB0B6" FromRole="TipoProduto" ToRole="TipoProdutoXProdutoXSaborXPreco" />
+        </EntityType>
+        <EntityType Name="TipoProdutoXProdutoXSaborXPreco">
+          <Key>
+            <PropertyRef Name="Id_TipoProdutoXPreco" />
+          </Key>
+          <Property Name="Id_TipoProdutoXPreco" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_TipoProduto" Type="Int32" Nullable="false" />
+          <Property Name="Id_Produto" Type="Int32" Nullable="false" />
+          <Property Name="Id_Sabor" Type="Int32" Nullable="false" />
+          <Property Name="Id_Preco" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Preco" Relationship="Self.FK__TipoProdu__Id_Pr__440B1D61" FromRole="TipoProdutoXProdutoXSaborXPreco" ToRole="Preco" />
+          <NavigationProperty Name="Produto" Relationship="Self.FK__TipoProdu__Id_Pr__4222D4EF" FromRole="TipoProdutoXProdutoXSaborXPreco" ToRole="Produto" />
+          <NavigationProperty Name="Sabor" Relationship="Self.FK__TipoProdu__Id_Sa__4316F928" FromRole="TipoProdutoXProdutoXSaborXPreco" ToRole="Sabor" />
+          <NavigationProperty Name="TipoProduto" Relationship="Self.FK__TipoProdu__Id_Ti__412EB0B6" FromRole="TipoProdutoXProdutoXSaborXPreco" ToRole="TipoProduto" />
+        </EntityType>
+        <Association Name="FK_Novidade_Produto">
+          <End Role="Produto" Type="Self.Produto" Multiplicity="1" />
+          <End Role="Novidade" Type="Self.Novidade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="Id_Produto" />
+            </Principal>
+            <Dependent Role="Novidade">
+              <PropertyRef Name="Id_Produto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TipoProdu__Id_Pr__440B1D61">
+          <End Role="Preco" Type="Self.Preco" Multiplicity="1" />
+          <End Role="TipoProdutoXProdutoXSaborXPreco" Type="Self.TipoProdutoXProdutoXSaborXPreco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Preco">
+              <PropertyRef Name="Id_Preco" />
+            </Principal>
+            <Dependent Role="TipoProdutoXProdutoXSaborXPreco">
+              <PropertyRef Name="Id_Preco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TipoProdu__Id_Pr__4222D4EF">
+          <End Role="Produto" Type="Self.Produto" Multiplicity="1" />
+          <End Role="TipoProdutoXProdutoXSaborXPreco" Type="Self.TipoProdutoXProdutoXSaborXPreco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="Id_Produto" />
+            </Principal>
+            <Dependent Role="TipoProdutoXProdutoXSaborXPreco">
+              <PropertyRef Name="Id_Produto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TipoProdu__Id_Sa__4316F928">
+          <End Role="Sabor" Type="Self.Sabor" Multiplicity="1" />
+          <End Role="TipoProdutoXProdutoXSaborXPreco" Type="Self.TipoProdutoXProdutoXSaborXPreco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sabor">
+              <PropertyRef Name="Id_Sabor" />
+            </Principal>
+            <Dependent Role="TipoProdutoXProdutoXSaborXPreco">
+              <PropertyRef Name="Id_Sabor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TipoProdu__Id_Ti__412EB0B6">
+          <End Role="TipoProduto" Type="Self.TipoProduto" Multiplicity="1" />
+          <End Role="TipoProdutoXProdutoXSaborXPreco" Type="Self.TipoProdutoXProdutoXSaborXPreco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoProduto">
+              <PropertyRef Name="Id_TipoProduto" />
+            </Principal>
+            <Dependent Role="TipoProdutoXProdutoXSaborXPreco">
+              <PropertyRef Name="Id_TipoProduto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Novidade" EntityType="Self.Novidade" />
+          <EntitySet Name="Preco" EntityType="Self.Preco" />
+          <EntitySet Name="Produto" EntityType="Self.Produto" />
+          <EntitySet Name="Sabor" EntityType="Self.Sabor" />
+          <EntitySet Name="TipoProduto" EntityType="Self.TipoProduto" />
+          <EntitySet Name="TipoProdutoXProdutoXSaborXPreco" EntityType="Self.TipoProdutoXProdutoXSaborXPreco" />
+          <AssociationSet Name="FK_Novidade_Produto" Association="Self.FK_Novidade_Produto">
+            <End Role="Produto" EntitySet="Produto" />
+            <End Role="Novidade" EntitySet="Novidade" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TipoProdu__Id_Pr__440B1D61" Association="Self.FK__TipoProdu__Id_Pr__440B1D61">
+            <End Role="Preco" EntitySet="Preco" />
+            <End Role="TipoProdutoXProdutoXSaborXPreco" EntitySet="TipoProdutoXProdutoXSaborXPreco" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TipoProdu__Id_Pr__4222D4EF" Association="Self.FK__TipoProdu__Id_Pr__4222D4EF">
+            <End Role="Produto" EntitySet="Produto" />
+            <End Role="TipoProdutoXProdutoXSaborXPreco" EntitySet="TipoProdutoXProdutoXSaborXPreco" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TipoProdu__Id_Sa__4316F928" Association="Self.FK__TipoProdu__Id_Sa__4316F928">
+            <End Role="Sabor" EntitySet="Sabor" />
+            <End Role="TipoProdutoXProdutoXSaborXPreco" EntitySet="TipoProdutoXProdutoXSaborXPreco" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TipoProdu__Id_Ti__412EB0B6" Association="Self.FK__TipoProdu__Id_Ti__412EB0B6">
+            <End Role="TipoProduto" EntitySet="TipoProduto" />
+            <End Role="TipoProdutoXProdutoXSaborXPreco" EntitySet="TipoProdutoXProdutoXSaborXPreco" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DocesBarbaraViewModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Novidade">
+            <EntityTypeMapping TypeName="DocesBarbaraViewModel.Novidade">
+              <MappingFragment StoreEntitySet="Novidade">
+                <ScalarProperty Name="Id_Novidade" ColumnName="Id_Novidade" />
+                <ScalarProperty Name="Desc_Novidade" ColumnName="Desc_Novidade" />
+                <ScalarProperty Name="Titulo_Novidade" ColumnName="Titulo_Novidade" />
+                <ScalarProperty Name="Dt_Novidade" ColumnName="Dt_Novidade" />
+                <ScalarProperty Name="Id_Produto" ColumnName="Id_Produto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Preco">
+            <EntityTypeMapping TypeName="DocesBarbaraViewModel.Preco">
+              <MappingFragment StoreEntitySet="Preco">
+                <ScalarProperty Name="Id_Preco" ColumnName="Id_Preco" />
+                <ScalarProperty Name="Valor_Produto" ColumnName="Valor_Produto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produto">
+            <EntityTypeMapping TypeName="DocesBarbaraViewModel.Produto">
+              <MappingFragment StoreEntitySet="Produto">
+                <ScalarProperty Name="Id_Produto" ColumnName="Id_Produto" />
+                <ScalarProperty Name="Nome_Produto" ColumnName="Nome_Produto" />
+                <ScalarProperty Name="Desc_Produto" ColumnName="Desc_Produto" />
+                <ScalarProperty Name="Vali_Produto" ColumnName="Vali_Produto" />
+                <ScalarProperty Name="Ativo" ColumnName="Ativo" />
+                <ScalarProperty Name="Imagem_Produto" ColumnName="Imagem_Produto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sabor">
+            <EntityTypeMapping TypeName="DocesBarbaraViewModel.Sabor">
+              <MappingFragment StoreEntitySet="Sabor">
+                <ScalarProperty Name="Id_Sabor" ColumnName="Id_Sabor" />
+                <ScalarProperty Name="Desc_Sabor" ColumnName="Desc_Sabor" />
+                <ScalarProperty Name="Ativo" ColumnName="Ativo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoProduto">
+            <EntityTypeMapping TypeName="DocesBarbaraViewModel.TipoProduto">
+              <MappingFragment StoreEntitySet="TipoProduto">
+                <ScalarProperty Name="Id_TipoProduto" ColumnName="Id_TipoProduto" />
+                <ScalarProperty Name="Desc_TipoProduto" ColumnName="Desc_TipoProduto" />
+                <ScalarProperty Name="Ativo" ColumnName="Ativo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoProdutoXProdutoXSaborXPreco">
+            <EntityTypeMapping TypeName="DocesBarbaraViewModel.TipoProdutoXProdutoXSaborXPreco">
+              <MappingFragment StoreEntitySet="TipoProdutoXProdutoXSaborXPreco">
+                <ScalarProperty Name="Id_TipoProdutoXPreco" ColumnName="Id_TipoProdutoXPreco" />
+                <ScalarProperty Name="Id_TipoProduto" ColumnName="Id_TipoProduto" />
+                <ScalarProperty Name="Id_Produto" ColumnName="Id_Produto" />
+                <ScalarProperty Name="Id_Sabor" ColumnName="Id_Sabor" />
+                <ScalarProperty Name="Id_Preco" ColumnName="Id_Preco" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
